@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Kervel Studio – Editorial Operating System</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Done-for-you short-form from your long-form content. Up to 30 shorts per month, weekly delivery, zero mental load." />
+  <style>
+    :root {
+      --bg: #050711;
+      --bg-alt: #0b0f1c;
+      --card: #020617;
+      --primary: #a855f7;
+      --primary-soft: rgba(168, 85, 247, 0.2);
+      --text: #f9fafb;
+      --muted: #9ca3af;
+      --border: #1f2933;
+      --danger: #ef4444;
+      --success: #22c55e;
+      --for-bg: #031b23;
+      --not-bg: #190a0f;
+      --font-main: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: var(--font-main);
+      background: radial-gradient(circle at top, #111827 0, #020617 45%, #000 100%);
+      color: var(--text);
+      line-height: 1.6;
+      font-size: 16px;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .page {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 24px 20px 44px;
+    }
+
+    /* LOGO KS DANS LE HERO */
+
+    .top-bar {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .ks-logo-circle {
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      background: radial-gradient(circle at top left, rgba(168, 85, 247, 0.4), #020617);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #e5e7eb;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.7);
+    }
+
+    .ks-logo-circle span {
+      background: linear-gradient(135deg, #f97316, #ec4899, #6366f1);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    /* HERO */
+
+    .hero {
+      padding: 22px 22px 26px;
+      border-radius: 24px;
+      background: radial-gradient(circle at top left, var(--primary-soft), #020617 70%);
+      border: 1px solid var(--border);
+      margin-bottom: 16px;
+    }
+
+    .hero-title {
+      font-size: clamp(30px, 3.5vw, 38px);
+      font-weight: 700;
+      margin: 0 0 12px;
+    }
+
+    .hero-subtitle {
+      color: var(--muted);
+      font-size: 15px;
+      max-width: 520px;
+      margin-bottom: 20px;
+    }
+
+    .hero-ctas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #8b5cf6, #ec4899);
+      color: #f9fafb;
+      font-size: 14px;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 12px 40px rgba(147, 51, 234, 0.35);
+    }
+
+    .btn-primary span.icon { font-size: 16px; }
+
+    .btn-primary:hover {
+      filter: brightness(1.05);
+      transform: translateY(-1px);
+    }
+
+    .hero-note {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .hero-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1.7fr) minmax(0, 1.1fr);
+      gap: 20px;
+      align-items: flex-start;
+      margin-top: 6px;
+    }
+
+    @media (max-width: 900px) {
+      .hero-row {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .hero-left {
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .hero-left strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .hero-card {
+      border-radius: 18px;
+      padding: 14px 14px 12px;
+      background: radial-gradient(circle at top, #1e293b 0, #020617 65%);
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      color: #e5e7eb;
+      font-size: 14px;
+    }
+
+    .hero-card-title {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .hero-metric {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+
+    .hero-metric-label {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .hero-points {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .hero-points li { margin-bottom: 4px; }
+
+    /* BLOC BIO INTÉGRÉ AU HERO (BAS) */
+
+    .hero-bio {
+      margin-top: 18px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      font-size: 15px;
+      color: var(--muted);
+    }
+
+    .hero-bio-avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 999px;
+      background: url("paul.jpg") center/cover no-repeat;
+      box-shadow:
+        0 0 0 2px #020617,
+        0 0 0 4px rgba(148, 163, 184, 0.55);
+      flex-shrink: 0;
+    }
+
+    .hero-bio-name {
+      font-weight: 600;
+      color: var(--text);
+      font-size: 15px;
+    }
+
+    /* SECTIONS GÉNÉRALES */
+
+    .section { margin-bottom: 26px; }
+
+    .section-title {
+      font-size: 20px;
+      margin-bottom: 8px;
+    }
+
+    .section-sub {
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    /* WHO THIS IS FOR */
+
+    .for-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 14px;
+    }
+
+    @media (max-width: 800px) {
+      .for-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .card-for, .card-not {
+      border-radius: 18px;
+      padding: 14px 14px 16px;
+      border: 1px solid var(--border);
+      font-size: 14px;
+    }
+
+    .card-for {
+      background: radial-gradient(circle at top, rgba(34, 197, 94, 0.12), var(--for-bg));
+      border-color: rgba(34, 197, 94, 0.35);
+    }
+
+    .card-not {
+      background: radial-gradient(circle at top, rgba(239, 68, 68, 0.08), var(--not-bg));
+      border-color: rgba(239, 68, 68, 0.5);
+    }
+
+    .card-for h3, .card-not h3 {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin: 0 0 8px;
+    }
+
+    .card-for h3 { color: #6ee7b7; }
+    .card-not h3 { color: #fecaca; }
+
+    .card-for ul, .card-not ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .card-for ul li, .card-not ul li { margin-bottom: 4px; }
+
+    /* PLAN (PRICING + WHAT YOU GET) */
+
+    .plan-card {
+      border-radius: 18px;
+      padding: 14px 16px 14px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      font-size: 14px;
+    }
+
+    .plan-card.pricing {
+      background: radial-gradient(circle at top left, rgba(168, 85, 247, 0.18), #020617);
+      border-color: rgba(168, 85, 247, 0.6);
+    }
+
+    .plan-card.output {
+      background: #020617;
+      border-color: var(--border);
+    }
+
+    .plan-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 3px 9px;
+      border-radius: 999px;
+      font-size: 11px;
+      margin-bottom: 8px;
+    }
+
+    .plan-tag.price {
+      background: rgba(168, 85, 247, 0.15);
+      color: #e9d5ff;
+    }
+
+    .plan-tag.output-tag {
+      background: rgba(148, 163, 184, 0.18);
+      color: #e5e7eb;
+    }
+
+    .plan-tag span.dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: currentColor;
+    }
+
+    .plan-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    @media (max-width: 640px) {
+      .plan-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    .plan-price {
+      font-size: 26px;
+      font-weight: 700;
+    }
+
+    .plan-price span {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--muted);
+    }
+
+    .plan-label {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .plan-note {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .plan-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .plan-list li { margin-bottom: 4px; }
+
+    /* HOW IT WORKS */
+
+    .steps {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 10px;
+      font-size: 14px;
+    }
+
+    .step {
+      border-radius: 16px;
+      padding: 10px 12px 12px;
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: 52px minmax(0, 1fr);
+      gap: 10px;
+      align-items: start;
+    }
+
+    .step-num-block {
+      text-align: center;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .step-num-circle {
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      border: 2px solid var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 4px;
+      font-size: 13px;
+    }
+
+    .step-title {
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .step-body {
+      color: var(--muted);
+    }
+
+    /* CTA & FOOTER */
+
+    .final-cta {
+      margin-top: 24px;
+      border-radius: 18px;
+      padding: 14px 16px;
+      background: linear-gradient(135deg, #020617, #111827);
+      border: 1px solid var(--border);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: center;
+      font-size: 14px;
+    }
+
+    .final-cta-text {
+      color: var(--muted);
+    }
+
+    footer {
+      margin-top: 26px;
+      font-size: 12px;
+      color: var(--muted);
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="top-bar">
+        <div class="ks-logo-circle"><span>KS</span></div>
+      </div>
+
+      <h1 class="hero-title">
+        I turn your long‑form into a done‑for‑you short‑form machine.
+      </h1>
+      <p class="hero-subtitle">
+        You record long‑form. I run the operating system that turns it into a steady stream of short‑form, without you managing an editor.
+      </p>
+
+      <div class="hero-ctas">
+        <a class="btn-primary" href="https://calendly.com/kervelpaul/15min" target="_blank" rel="noopener noreferrer">
+          <span class="icon">▶</span>
+          <span>See if this system fits your workflow</span>
+        </a>
+        <div class="hero-note">
+          15‑minute call · No pitch if it’s not a fit
+        </div>
+      </div>
+
+      <div class="hero-row">
+        <div>
+          <div class="hero-left">
+            <strong>Kervel Studio · Editorial Operating System</strong><br />
+            Built for creators, coaches, and founders who already record long‑form
+            and want short‑form handled without touching the timeline.
+          </div>
+
+          <div class="hero-bio">
+            <div class="hero-bio-avatar"></div>
+            <div>
+              <span class="hero-bio-name">Paul Kervel</span> · I am the Operator.
+            </div>
+          </div>
+        </div>
+
+        <aside class="hero-card">
+          <div class="hero-card-title">At a glance</div>
+          <div class="hero-metric">30 shorts / month</div>
+          <div class="hero-metric-label">Weekly delivery · Zero intervention</div>
+          <ul class="hero-points">
+            <li>Clips cut from the long‑form you already record.</li>
+            <li>Organised across the month, ready to schedule.</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <!-- WHO THIS IS FOR -->
+    <section class="section">
+      <h2 class="section-title">Who this is for (and not for)</h2>
+      <p class="section-sub">
+        Two quick filters so you know right away if this system is built for you.
+      </p>
+      <div class="for-grid">
+        <div class="card-for">
+          <h3>✓ This is for you if…</h3>
+          <ul>
+            <li>You already record long‑form (podcasts, YouTube, interviews, calls).</li>
+            <li>You want consistent clips on Reels, TikTok, and Shorts.</li>
+            <li>You’d rather plug into a system than manage an editor.</li>
+          </ul>
+        </div>
+        <div class="card-not">
+          <h3>⚠ This is not for you if…</h3>
+          <ul>
+            <li>You want to choose every single clip yourself.</li>
+            <li>You expect weekly strategy calls and consulting.</li>
+            <li>You want guarantees on views, leads, or revenue.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRICING -->
+    <section class="section">
+      <h2 class="section-title">Pricing</h2>
+      <p class="section-sub">
+        One plan. No tiers, no menu.
+      </p>
+      <div class="plan-card pricing">
+        <div class="plan-tag price">
+          <span class="dot"></span> Pricing
+        </div>
+        <div class="plan-header">
+          <div class="plan-price">$899 <span>/ month</span></div>
+          <div class="plan-label">Flat monthly fee · Cancel anytime</div>
+        </div>
+        <div class="plan-note">
+          Payment upfront via Stripe once we confirm it’s a fit. Once payment is received, production starts.
+        </div>
+      </div>
+    </section>
+
+    <!-- WHAT YOU GET -->
+    <section class="section">
+      <h2 class="section-title">What you get</h2>
+      <p class="section-sub">
+        The output your audience sees, every month.
+      </p>
+      <div class="plan-card output">
+        <div class="plan-tag output-tag">
+          <span class="dot"></span> What you get
+        </div>
+        <ul class="plan-list">
+          <li>Up to 30 short‑form clips per month from your existing long‑form.</li>
+          <li>Vertical formats for Instagram Reels, TikTok, and YouTube Shorts.</li>
+          <li>Subtitles designed for retention.</li>
+          <li>Weekly deliveries organised across the month.</li>
+          <li>Short‑form handled without you touching the timeline.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="section">
+      <h2 class="section-title">How it works</h2>
+      <p class="section-sub">
+        Three simple steps. Same flow every week.
+      </p>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num-block">
+            <div class="step-num-circle">1</div>
+            <div>Input</div>
+          </div>
+          <div>
+            <div class="step-title">You send long‑form</div>
+            <div class="step-body">
+              Podcast episodes, YouTube videos, interviews, or client calls – via Drive, Dropbox, or unlisted links.
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num-block">
+            <div class="step-num-circle">2</div>
+            <div>System</div>
+          </div>
+          <div>
+            <div class="step-title">I pull, cut, and caption</div>
+            <div class="step-body">
+              AI‑assisted selection plus my own judgement to find the strongest segments and turn them into clean, captioned clips.
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num-block">
+            <div class="step-num-circle">3</div>
+            <div>Output</div>
+          </div>
+          <div>
+            <div class="step-title">You receive weekly folders</div>
+            <div class="step-body">
+              A fresh batch of clips each week, organised across the month. You drop them into your scheduler and move on.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <div class="final-cta">
+      <div class="final-cta-text">
+        If you want your short‑form handled without thinking about it:
+      </div>
+      <a class="btn-primary" href="https://calendly.com/kervelpaul/15min" target="_blank" rel="noopener noreferrer">
+        <span class="icon">▶</span>
+        <span>See if this system fits your workflow</span>
+      </a>
+    </div>
+
+    <footer>
+      Kervel Studio · Editorial Operating System
+    </footer>
+  </div>
+</body>
+</html>
